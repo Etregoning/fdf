@@ -51,10 +51,6 @@ void  check_width(draw_line *arg, int width1, int width2, int fd)
 	}
   else
     ft_error("Error: Empty map");
-  while (get_next_line(fd, &(arg->line)))
-  {
-
-  }
 }
 
 void  parse_map(char *av)
