@@ -47,9 +47,9 @@ int   z_value(int fd, map *m)
     i = 0;
     while (i < m->w)
     {
-        m->hmax = m->map[x][i] > m->hmax ? m->map[x][i] : m->hmax;
-        m->hmin = m->map[x][i] < m->hmin ? m->map[x][i] : m->hmin;
-        i++;
+      m->hmax = m->map[x][i] > m->hmax ? m->map[x][i] : m->hmax;
+      m->hmin = m->map[x][i] < m->hmin ? m->map[x][i] : m->hmin;
+      i++;
     }
     x++;
   }
