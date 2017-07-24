@@ -24,6 +24,7 @@ typedef struct  s_coord
   float         x;
   float         y;
   float         z;
+  float         raw_z;
 }               coord;
 
 typedef struct  s_draw_line
@@ -64,6 +65,10 @@ typedef struct  s_env
   float         win_w;
   int           mid_x;
   int           mid_y;
+  int           i;
+  int           j;
+  float         z;
+  float         next_z;
   void          *mlx;
   void          *win;
   void          *img;
