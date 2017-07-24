@@ -37,7 +37,7 @@ void    draw_down(env *fdf, draw_line **bresen)
     {
       values_down(&fdf, fdf->i, fdf->j);
       if (fdf->run == 0 && fdf->i + 1 < fdf->h)
-        ft_slopestraight(fdf);
+        slope_flat(fdf);
       else
       {
         fdf->m = fdf->rise / fdf->run;
@@ -79,6 +79,34 @@ void    draw_right(env *fdf, draw_line **b)
     while (fdf->j < fdf->w)
     {
       values_right(&fdf, fdf->i, fdf->j);
+      if (fdf->run == 0  && fdf->j + 1 < fdf->h)
+        slope_flat(fdf);
+      else
+      {
+        fdf->m = fdf->rise / fdf->run;
+        (*b)->adjust = fdf->m >= 0 ? 1 : -1;
+        (*b)->offset = 0;
+        (*b)->threshold = 0.5;
+        if (fdf->m <= 1 && fdf->m >= -1)
+          slope_shallow(fdf, *b)
+        else
+          slope_steep(fdf, *b)
+      }
+      fdf->j++;
     }
+    fdf->i++;
   }
+}
+
+void plot_lines(env *fdf)
+{
+  int x;
+  int y;
+  draw_line *bresen;
+
+  x = 0;
+  y = 0;
+  bresen = (draw_line *)malloc(sizeof(draw_line));
+  draw_right(fdf, &bresen);
+  draw_down(fdf, &bresen);
 }
