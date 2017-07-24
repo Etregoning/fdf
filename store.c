@@ -48,7 +48,7 @@ int   z_value(int fd, map *m)
     while (i < m->w)
     {
         m->hmax = m->map[x][i] > m->hmax ? m->map[x][i] : m->hmax;
-        m->hmin = m->nap[x][i] < m->hmin ? m->map[x][i] : m->hmin;
+        m->hmin = m->map[x][i] < m->hmin ? m->map[x][i] : m->hmin;
         i++;
     }
     x++;
@@ -73,7 +73,6 @@ void  get_dimensions(int fd, map *list)
     y++;
   list->h = y;
   close(fd);
-
 }
 
 void  store_map(char *av, map *list)
@@ -84,6 +83,4 @@ void  store_map(char *av, map *list)
   get_dimensions(fd, list);
   fd == open(av, O_RDONLY);
   z_value(fd, &list);
-
-
 }
