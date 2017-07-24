@@ -46,11 +46,11 @@ int	main(void)
 
 	if (ac != 2)
 		ft_error("Error: Invalid argument(s).")
-	parse_map(av[1]);
 	if (!(m = (map *)ft_memalloc(sizeof(map))))
 		ft_error("Error: Failed to allocate memory.")
+	parse_map(av[1]);
 	store_map(av[1], m);
-	make_env(m);
+	fdf = make_env(m);
 	mlx_loop(fdf->mlx);
 	return (0);
 }

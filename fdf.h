@@ -15,6 +15,9 @@
 #include <mlx.h>
 #include <libft.h>
 #include <math.h>
+# define WHITE 0x00FFFFFF
+# define BLUE 0x00242cf8
+# define RED  0x00FF0000
 
 typedef struct  s_coord
 {
@@ -28,6 +31,10 @@ typedef struct  s_draw_line
   char          *str;
   char          **points;
   char          *line;
+  float         delta;
+  float         offset;
+  float         threshold;
+  float         adjust;
 }               draw_line;
 
 typedef struct  s_map
