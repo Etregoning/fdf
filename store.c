@@ -19,10 +19,10 @@ int *split_atoi(char **s, int w)
 
   i = 0;
   map = (int *)malloc(sizeof(int) * (w + 1));
-  while (j < w)
+  while (i < w)
   {
-    map[j] = ft_atoi(&s[j][0]);
-    j++;
+    map[i] = ft_atoi(&s[i][0]);
+    i++;
   }
   return (map);
 }
