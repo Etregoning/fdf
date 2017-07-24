@@ -33,6 +33,8 @@ typedef struct  s_draw_line
 typedef struct  s_map
 {
   int           **map_ptr;
+  int           win_x;
+  int           win_y;
   int           hmax;
   int           hmin;
   int           h;
@@ -46,6 +48,15 @@ typedef struct  s_env
   float         x2;
   float         y1;
   float         y2;
+  int           gap;
+  int           big;
+  float         rise;
+  float         run;
+  float         m;
+  float         win_h;
+  float         win_w;
+  int           mid_x;
+  int           mid_y;
   void          *mlx;
   void          *win;
   void          *img;
