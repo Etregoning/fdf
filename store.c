@@ -12,9 +12,25 @@
 
 #include "fdf.h"
 
+int *split_atoi(char **s, int w)
+{
+  int *map;
+  int i;
+
+  i = 0;
+  map = (int *)malloc(sizeof(int) * (w + 1));
+  while (j < w)
+  {
+    map[j] = ft_atoi(&s[j][0]);
+    j++;
+  }
+  return (map);
+}
+
 int   z_value(int fd, map *m)
 {
   int   x;
+  int   i;
   char  *points;
   char  **line;
 
@@ -25,9 +41,19 @@ int   z_value(int fd, map *m)
   while (get_next_line(fd, &line))
   {
     points = ft_strsplit(line, ' ');
-
+    m->map[x] = split_atoi(points, m->w);
+    free(points);
+    free(line);
+    i = 0;
+    while (i < m->w)
+    {
+        m->hmax = m->map[x][i] > m->hmax ? m->map[x][i] : m->hmax;
+        m->hmin = m->nap[x][i] < m->hmin ? m->map[x][i] : m->hmin;
+        i++;
+    }
+    x++;
   }
-
+  close(fd);
 }
 
 void  get_dimensions(int fd, map *list)

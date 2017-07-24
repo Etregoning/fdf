@@ -38,36 +38,18 @@ void	x_axis(env **fdf, int x1, int x2, int y1, int y2)
 	}
 }
 
-/*
-void	y_axis(env **fdf)
-{
-	int x;
-	int y;
 
-	x = 200;
-	y = 1000;
-	while (x <= 1000)
-	{
-		mlx_pixel_put((*fdf)->mlx, (*fdf)->win, x, y, 0x00FF0000);
-		y--;
-		x++;
-		if (y == 800)
-		{
-			y -= 10;
-			x += 20;
-		}
-	}
-}
-*/
 int	main(void)
 {
 	env *fdf;
+	map *m;
 
 	if (ac != 2)
 		ft_error("Error: Invalid argument(s).")
 	parse_map(av[1]);
-	fdf = (env *)ft_memalloc(sizeof(env));
-	store_map(av[1]);
+	if (!(m = (map *)ft_memalloc(sizeof(map))))
+		ft_error("Error: Failed to allocate memory.")
+	store_map(av[1], m);
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, 1400, 1000, "Elliot's Window");
 	fdf->img = mlx_new_image(fdf->mlx, 1000, 600);
