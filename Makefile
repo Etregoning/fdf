@@ -13,13 +13,16 @@
 NAME		= fdf
 CFLAGS	= -Wall -Werror -Wextra -lmlx -lft -framework OpenGL -framework AppKit
 INCLUDES = -I./includes/mlx -I./includes/libft -L./includes/mlx -L./includes/libft
-SRC 		= main.c
+SRC 		= main.c parse.c store.c environment.c slope.c draw.c
 OBJ			= $(FILES:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@gcc $(CFLAGS) $(SRC) $(INCLUDES) -o $(NAME)
+
+debug:
+	@gcc $(CFLAGS) -g $(SRC) $(INCLUDES) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)

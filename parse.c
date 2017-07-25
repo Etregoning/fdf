@@ -28,26 +28,27 @@ void  check_line(char *str)
 
   i = 0;
   if (!*str)
-    ft_error("Error: Line not read.")
+    ft_error("Error: Line not read.");
   while (str[i] != '\0')
   {
     if (ft_isalpha(str[i]) == 1)
-      ft_error("Error: Alphabetical characters found.")
-    if ((s[i] == '-' && !(ft_isdigit(s[i + 1]))) || s[i] == '\t' )
-      ft_error("Error: Forbidden characters found.")
+      ft_error("Error: Alphabetical characters found.");
+    if ((str[i] == '-' && !(ft_isdigit(str[i + 1]))) || str[i] == '\t' )
+      ft_error("Error: Forbidden characters found.");
     i++;
   }
 }
 
-void  check_width(draw_line *arg, int width1, int width2, int fd)
+void  check_width(draw_line *arg, int fd)
 {
+  int width;
+
   if (get_next_line(fd, &(arg->line)))
   {
     check_line(arg->line);
-    if (!(width1 = find_width(arg->coord)))
+    if (!(width = find_width(arg->points)))
       ft_error("Error: Invalid Width");
     free (arg->line);
-    free (arg->coord);
 	}
   else
     ft_error("Error: Empty map");
@@ -55,15 +56,13 @@ void  check_width(draw_line *arg, int width1, int width2, int fd)
 
 void  parse_map(char *av)
 {
-  draw_line *arg;
-  int       width1;
-  int       width2;
-  int       fd
+  draw_line arg;
+  int       fd;
 
   if ((arg.str = ft_strstr(av, ".fdf")) == 0)
     ft_error("Error: Invalid filename.");
   if ((fd = open(av, O_RDONLY)) < 0)
-    ft_error("Error: Opening file failed.")
-  check_width(&arg, width1, width2, fd);
+    ft_error("Error: Opening file failed.");
+  check_width(&arg, fd);
 
 }

@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-include "fdf.h";
+#include "fdf.h"
 
-coord  plot_cart(env **fdf, map *m)
+coord  **plot_cart(env **fdf, map *m)
 {
   int i;
   int j;
   coord **cart;
 
-  (*fdf)->mid_x = m.w / 2;
-  (*fdf)->mid_y = m.h / 2;
-  cart = (map **)malloc(sizeof(map *) * (m.h + 1));
+  (*fdf)->mid_x = m->w / 2;
+  (*fdf)->mid_y = m->h / 2;
+  cart = (coord **)malloc(sizeof(coord *) * (m->h + 1));
   i = 0;
-  while (i < m.h)
+  while (i < m->h)
   {
     j = 0;
-    cart[i] = (map *)malloc(sizeof(map) * (m.w + 1));
-    while (j < m.w)
+    cart[i] = (coord *)malloc(sizeof(coord) * (m->w + 1));
+    while (j < m->w)
     {
       cart[i][j].x = (j - (*fdf)->mid_x) * (*fdf)->gap;
       cart[i][j].y = (i - (*fdf)->mid_y) * (*fdf)->gap;
-      cart[i][j].z = m.map_ptr[i][j];
+      cart[i][j].z = m->map_ptr[i][j];
       j++;
     }
     i++;
@@ -50,14 +50,14 @@ env *make_env(map *m)
   fdf->x2 = 0;
   fdf->y1 = 0;
   fdf->y2 = 0;
-  fdf->gap = m.w > m.h ? m.win_x / (m.w) : m.win_y / (m.h);
-  fdf->big = m.w > m.h ? m. : m.h;
+  fdf->gap = m->w > m->h ? m->win_x / (m->w) : m->win_y / (m->h);
+  fdf->big = m->w > m->h ? m->w : m->h;
   fdf->rise = 0;
   fdf->run = 0;
   fdf->m = 0;
-  fdf->win_width = 800 + (fdf->gap) * (fdf->big);
-  fdf->win_height = (fdf->win_width) - 300;
-  fdf->cart =  plot_cart(&fdf, m);
+  fdf->win_w = 800 + (fdf->gap) * (fdf->big);
+  fdf->win_h = (fdf->win_w) - 300;
+  fdf->cart = plot_cart(&fdf, m);
   fdf->mlx = mlx_init();
   fdf->win = mlx_new_window(fdf->mlx, fdf->win_w, fdf->win_h, "FdF");
   return (fdf);

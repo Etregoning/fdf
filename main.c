@@ -39,15 +39,15 @@ void	x_axis(env **fdf, int x1, int x2, int y1, int y2)
 }
 
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	env *fdf;
 	map *m;
 
 	if (ac != 2)
-		ft_error("Error: Invalid argument(s).")
+		ft_error("Error: Invalid argument(s).");
 	if (!(m = (map *)ft_memalloc(sizeof(map))))
-		ft_error("Error: Failed to allocate memory.")
+		ft_error("Error: Failed to allocate memory.");
 	parse_map(av[1]);
 	store_map(av[1], m);
 	fdf = make_env(m);

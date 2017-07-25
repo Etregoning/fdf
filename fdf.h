@@ -67,11 +67,21 @@ typedef struct  s_env
   int           mid_y;
   int           i;
   int           j;
+  int           h;
+  int           w;
   float         z;
   float         next_z;
   void          *mlx;
   void          *win;
   void          *img;
 }               env;
+
+void  parse_map(char *av);
+void  store_map(char *av, map *list);
+env *make_env(map *m);
+int find_width(char **map_coord);
+void  slope_steep(env *fdf, draw_line *values);
+void slope_shallow(env *fdf, draw_line *values);
+void slope_flat(env *fdf);
 
 #endif

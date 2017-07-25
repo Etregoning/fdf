@@ -27,12 +27,12 @@ int *split_atoi(char **s, int w)
   return (map);
 }
 
-int   z_value(int fd, map *m)
+void   z_value(int fd, map *m)
 {
   int   x;
   int   i;
-  char  *points;
-  char  **line;
+  char  **points;
+  char  *line;
 
   x = 0;
   m->hmin = 0;
@@ -41,14 +41,14 @@ int   z_value(int fd, map *m)
   while (get_next_line(fd, &line))
   {
     points = ft_strsplit(line, ' ');
-    m->map[x] = split_atoi(points, m->w);
+    m->map_ptr[x] = split_atoi(points, m->w);
     free(points);
     free(line);
     i = 0;
     while (i < m->w)
     {
-      m->hmax = m->map[x][i] > m->hmax ? m->map[x][i] : m->hmax;
-      m->hmin = m->map[x][i] < m->hmin ? m->map[x][i] : m->hmin;
+      m->hmax = m->map_ptr[x][i] > m->hmax ? m->map_ptr[x][i] : m->hmax;
+      m->hmin = m->map_ptr[x][i] < m->hmin ? m->map_ptr[x][i] : m->hmin;
       i++;
     }
     x++;
@@ -81,6 +81,6 @@ void  store_map(char *av, map *list)
 
   fd = open(av, O_RDONLY);
   get_dimensions(fd, list);
-  fd == open(av, O_RDONLY);
-  z_value(fd, &list);
+  fd = open(av, O_RDONLY);
+  z_value(fd, list);
 }

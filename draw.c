@@ -21,7 +21,7 @@ void   values_down(env **fdf, int i, int j)
     (*fdf)->x1 = round((*fdf)->cart[i + 1][j].x);
     (*fdf)->y1 = round((*fdf)->cart[i + 1][j].y);
     (*fdf)->z = (*fdf)->cart[i][j].raw_z;
-    (*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z
+    (*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
     (*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
     (*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
   }
@@ -44,7 +44,7 @@ void    draw_down(env *fdf, draw_line **bresen)
         (*bresen)->adjust = fdf->m >= 0 ? 1 : -1;
         (*bresen)->offset = 0;
         (*bresen)->threshold = 0.5;
-        if (*fdf->m <= 1 && fdf->m >= 1)
+        if (fdf->m <= 1 && fdf->m >= 1)
           slope_shallow(fdf, *bresen);
         else
           slope_steep(fdf, *bresen);
@@ -64,7 +64,7 @@ void   values_right(env **fdf, int i, int j)
     (*fdf)->x1 = round((*fdf)->cart[i][j + 1].x);
     (*fdf)->y1 = round((*fdf)->cart[i][j + 1].y);
     (*fdf)->z = (*fdf)->cart[i][j].raw_z;
-    (*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z
+    (*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
     (*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
     (*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
   }
@@ -88,9 +88,9 @@ void    draw_right(env *fdf, draw_line **b)
         (*b)->offset = 0;
         (*b)->threshold = 0.5;
         if (fdf->m <= 1 && fdf->m >= -1)
-          slope_shallow(fdf, *b)
+          slope_shallow(fdf, *b);
         else
-          slope_steep(fdf, *b)
+          slope_steep(fdf, *b);
       }
       fdf->j++;
     }
