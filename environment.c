@@ -30,9 +30,7 @@ coord  **plot_cart(env **fdf, map *m)
     {
       cart[i][j].x = (j - (*fdf)->mid_x) * (*fdf)->gap;
       cart[i][j].y = (i - (*fdf)->mid_y) * (*fdf)->gap;
-      printf("%d\n", 1);
       cart[i][j].z = m->map_ptr[i][j] * 5;
-      printf("%d\n", 2);
       cart[i][j].raw_z = m->map_ptr[i][j];
       j++;
     }
