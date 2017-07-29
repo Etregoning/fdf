@@ -76,10 +76,10 @@ typedef struct  s_env
   void          *img;
 }               env;
 
-void  parse_map(char *av);
-void  store_map(char *av, map *list);
+void  parse_xy(map *m, int fd, draw_line *arg);
+void  parse_z(map *m, int fd);
 env *make_env(map *m);
-int find_width(char **map_coord);
+int count_width(char **map_coord);
 void  slope_steep(env *fdf, draw_line *values);
 void slope_shallow(env *fdf, draw_line *values);
 void slope_flat(env *fdf);

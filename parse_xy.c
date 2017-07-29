@@ -11,16 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int find_width(char **map_coord)
-{
-  int x;
-
-  x = 0;
-  while (map_coord[x])
-    x++;
-  return (x);
-}
+#include <stdio.h>
 
 void  check_line(char *str)
 {
@@ -39,30 +30,62 @@ void  check_line(char *str)
   }
 }
 
-void  check_width(draw_line *arg, int fd)
+int count_width(char **map_coord)
 {
   int width;
 
+  width = 0;
+  while (map_coord[width])
+    width++;
+  return (width);
+}
+
+int  get_width(draw_line *arg, int fd, map *m, int y)
+{
+  int width;
+  char **points;
+
   if (get_next_line(fd, &(arg->line)))
   {
+    printf("%s\n", arg->line);
     check_line(arg->line);
-    if (!(width = find_width(arg->points)))
+    if (!(width = count_width(arg->points)))
       ft_error("Error: Invalid Width");
-    free (arg->line);
+    else
+    {
+      points = ft_strsplit(arg->line, ' ');
+      m->w = width;
+    }
 	}
   else
     ft_error("Error: Empty map");
+  return (y);
 }
 
-void  parse_map(char *av)
+void get_height(draw_line *arg, int fd, map *m, int y)
 {
-  draw_line arg;
-  int       fd;
+  char **points;
+  int width;
 
-  if ((arg.str = ft_strstr(av, ".fdf")) == 0)
-    ft_error("Error: Invalid filename.");
-  if ((fd = open(av, O_RDONLY)) < 0)
-    ft_error("Error: Opening file failed.");
-  check_width(&arg, fd);
+  while (get_next_line(fd, &(arg->line)))
+  {
+    check_line(arg->line);
+    if (!(width = count_width(arg->points)))
+      ft_error("Error: Invalid Width");
+    else
+      points = ft_strsplit(arg->line, ' ');
+      y++;
+  }
+  m->h = y;
+  free(arg->line);
+  close(fd);
+}
 
+void  parse_xy(map *m, int fd, draw_line *arg)
+{
+  int y;
+
+  y = 0;
+  get_width(arg, fd, m, y);
+  get_height(arg, fd, m, y);
 }

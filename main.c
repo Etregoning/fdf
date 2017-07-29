@@ -12,44 +12,25 @@
 
 #include "fdf.h"
 
-void	x_axis(env **fdf, int x1, int x2, int y1, int y2)
-{
-	int dx;
-	int dy;
-	int p;
-
-	dx = x2 - x1;
-	dy = y2 - y1;
-	p = 2 * (dy - dx);
-	while (x1 < x2)
-	{
-		if (p >= 0)
-		{
-			mlx_pixel_put((*fdf)->mlx, (*fdf)->win, x1, y1, 0x00FF0000);
-			y1--;
-			p = p + 2 * dy - 2 * dx;
-		}
-		else
-		{
-			mlx_pixel_put((*fdf)->mlx, (*fdf)->win, x1, y1, 0x00FF0000);
-			p = p + 2 * dy;
-		}
-		x1++;
-	}
-}
-
-
 int	main(int ac, char **av)
 {
 	env *fdf;
 	map *m;
+	draw_line arg;
+	int fd;
 
 	if (ac != 2)
 		ft_error("Error: Invalid argument(s).");
 	if (!(m = (map *)ft_memalloc(sizeof(map))))
 		ft_error("Error: Failed to allocate memory.");
-	parse_map(av[1]);
-	store_map(av[1], m);
+	if ((arg.str = ft_strstr(av[1], ".fdf")) == 0)
+	    ft_error("Error: Invalid file extension.");
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+	    ft_error("Error: Opening file failed.");
+	parse_xy(m, fd, &arg);
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+	    ft_error("Error: Opening file failed.");
+	parse_z(m, fd);
 	fdf = make_env(m);
 	mlx_loop(fdf->mlx);
 	return (0);

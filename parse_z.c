@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 int *split_atoi(char **s, int w)
 {
@@ -27,7 +28,7 @@ int *split_atoi(char **s, int w)
   return (map);
 }
 
-void   z_value(int fd, map *m)
+void   parse_z(map *m, int fd)
 {
   int   x;
   int   i;
@@ -38,12 +39,10 @@ void   z_value(int fd, map *m)
   m->hmin = 0;
   m->hmax = 0;
   m->map_ptr = (int **)malloc(sizeof(int *) * (m->h + 1));
-  while (get_next_line(fd, &line))
+  while (get_next_line(fd, &line) > 0)
   {
     points = ft_strsplit(line, ' ');
     m->map_ptr[x] = split_atoi(points, m->w);
-    free(points);
-    free(line);
     i = 0;
     while (i < m->w)
     {
@@ -53,34 +52,7 @@ void   z_value(int fd, map *m)
     }
     x++;
   }
+  free(points);
+  free(line);
   close(fd);
-}
-
-void  get_dimensions(int fd, map *list)
-{
-  char *line;
-  char **points;
-  int y;
-
-  y = 0;
-  if (get_next_line(fd, &line))
-  {
-    y++;
-    points = ft_strsplit(line, ' ');
-    list->w = find_width(points);
-  }
-  while (get_next_line(fd, &line))
-    y++;
-  list->h = y;
-  close(fd);
-}
-
-void  store_map(char *av, map *list)
-{
-  int fd;
-
-  fd = open(av, O_RDONLY);
-  get_dimensions(fd, list);
-  fd = open(av, O_RDONLY);
-  z_value(fd, list);
 }
