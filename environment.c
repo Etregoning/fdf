@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
+
 coord  **plot_cart(env **fdf, map *m)
 {
   int i;

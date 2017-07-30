@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void  check_line(char *str)
 {
@@ -47,7 +46,6 @@ int  get_width(draw_line *arg, int fd, map *m, int y)
 
   if (get_next_line(fd, &(arg->line)))
   {
-    printf("%s\n", arg->line);
     check_line(arg->line);
     if (!(width = count_width(arg->points)))
       ft_error("Error: Invalid Width");
