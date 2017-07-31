@@ -15,6 +15,7 @@
 #include <mlx.h>
 #include <libft.h>
 #include <math.h>
+#include <stdio.h>
 # define WHITE 0x00FFFFFF
 # define BLUE 0x00242cf8
 # define RED  0x00FF0000
@@ -83,5 +84,6 @@ int count_width(char **map_coord);
 void  slope_steep(env *fdf, draw_line *values);
 void slope_shallow(env *fdf, draw_line *values);
 void slope_flat(env *fdf);
+void    plot_lines(env *fdf, map *m);
 
 #endif

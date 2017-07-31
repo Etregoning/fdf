@@ -14,24 +14,25 @@
 
 int	main(int ac, char **av)
 {
-	env *fdf;
-	map *m;
-	draw_line arg;
-	int fd;
+	env			*fdf;
+	map			*m;
+	draw_line	arg;
+	int			fd;
 
 	if (ac != 2)
 		ft_error("Error: Invalid argument(s).");
 	if (!(m = (map *)ft_memalloc(sizeof(map))))
 		ft_error("Error: Failed to allocate memory.");
 	if ((arg.str = ft_strstr(av[1], ".fdf")) == 0)
-	    ft_error("Error: Invalid file extension.");
+		ft_error("Error: Invalid file extension.");
 	if ((fd = open(av[1], O_RDONLY)) < 0)
-	    ft_error("Error: Opening file failed.");
+		ft_error("Error: Opening file failed.");
 	parse_xy(m, fd, &arg);
 	if ((fd = open(av[1], O_RDONLY)) < 0)
-	    ft_error("Error: Opening file failed.");
+		ft_error("Error: Opening file failed.");
 	parse_z(m, fd);
 	fdf = make_env(m);
+	plot_lines(fdf, m);
 	mlx_loop(fdf->mlx);
 	return (0);
 }
