@@ -38,7 +38,6 @@ void   parse_z(map *m, int fd)
 	m->hmin = 0;
 	m->hmax = 0;
 	m->map_ptr = (int **)malloc(sizeof(int *) * (m->h + 1));
-	printf("map_ptr has been malloc'd\n");
 	while (get_next_line(fd, &line) > 0)
 	{
 		points = ft_strsplit(line, ' ');
@@ -55,5 +54,4 @@ void   parse_z(map *m, int fd)
 	free(points);
 	free(line);
 	close(fd);
-	printf("Parsing z complete\n");
 }
