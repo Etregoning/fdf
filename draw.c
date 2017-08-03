@@ -18,10 +18,10 @@ void	values_down(env **fdf, int i, int j)
 	{
 		(*fdf)->x1 = round((*fdf)->cart[i][j].x);
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
-		(*fdf)->x1 = round((*fdf)->cart[i + 1][j].x);
-		(*fdf)->y1 = round((*fdf)->cart[i + 1][j].y);
-		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
-		(*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
+		(*fdf)->x2 = round((*fdf)->cart[i + 1][j].x);
+		(*fdf)->y2 = round((*fdf)->cart[i + 1][j].y);
+		(*fdf)->z = (*fdf)->cart[i][j].z;
+		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
@@ -30,7 +30,7 @@ void	values_down(env **fdf, int i, int j)
 void	draw_down(env *fdf, map *m, draw_line **bresen)
 {
 	fdf->i = 0;
-	while (fdf->i < m->h)
+	while (fdf->i + 1 < m->h)
 	{
 		fdf->j = 0;
 		while (fdf->j < m->w)
@@ -47,7 +47,7 @@ void	draw_down(env *fdf, map *m, draw_line **bresen)
 				(*bresen)->offset = 0;
 				(*bresen)->threshold = 0.5;
 				if (fdf->m <= 1 && fdf->m >= -1)
-					slope_shallow(fdf, *bresen);
+					slope_gradual(fdf, *bresen);
 				else
 					slope_steep(fdf, *bresen);
 			}
@@ -63,24 +63,24 @@ void	values_right(env **fdf, int i, int j)
 	{
 		(*fdf)->x1 = round((*fdf)->cart[i][j].x);
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
-		(*fdf)->x1 = round((*fdf)->cart[i][j + 1].x);
-		(*fdf)->y1 = round((*fdf)->cart[i][j + 1].y);
-		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
-		(*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
+		(*fdf)->x2 = round((*fdf)->cart[i][j + 1].x);
+		(*fdf)->y2 = round((*fdf)->cart[i][j + 1].y);
+		(*fdf)->z = (*fdf)->cart[i][j].z;
+		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
+	printf("y1 = %f, y2 = %f\n", (*fdf)->y1, (*fdf)->y2);
+	printf("x1 = %f, x2 = %f\n", (*fdf)->x1, (*fdf)->x2);
 }
 
 void	draw_right(env *fdf, map *m, draw_line **bresen)
 {
-	printf("%d\n", m->h);
 	fdf->i = 0;
 	while (fdf->i < m->h)
 	{
-		printf("i = %d\n", fdf->i);
 		fdf->j = 0;
-		while (fdf->j < m->w)
+		while (fdf->j + 1 < m->w)
 		{
 			values_right(&fdf, fdf->i, fdf->j);
 			if (fdf->run == 0  && fdf->j + 1 < m->h)
@@ -92,7 +92,7 @@ void	draw_right(env *fdf, map *m, draw_line **bresen)
 				(*bresen)->offset = 0;
 				(*bresen)->threshold = 0.5;
 				if (fdf->m <= 1 && fdf->m >= -1)
-					slope_shallow(fdf, *bresen);
+					slope_gradual(fdf, *bresen);
 				else
 					slope_steep(fdf, *bresen);
 			}
@@ -104,14 +104,9 @@ void	draw_right(env *fdf, map *m, draw_line **bresen)
 
 void	plot_lines(env *fdf, map *m)
 {
-	int x;
-	int y;
 	draw_line *bresen;
 
-	x = 0;
-	y = 0;
 	bresen = (draw_line *)malloc(sizeof(draw_line));
-	printf("bresen has been malloc'd\n");
 	draw_right(fdf, m, &bresen);
-	draw_down(fdf, m, &bresen);
+	//draw_down(fdf, m, &bresen);
 }

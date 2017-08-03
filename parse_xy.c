@@ -77,7 +77,6 @@ void	get_height(draw_line *arg, int fd, map *m, int y)
 			y++;
 	}
 	m->h = y;
-	printf("m-> = %d\n", m->h);
 	free(arg->points);
 	free(arg->line);
 	close(fd);
@@ -90,5 +89,4 @@ void	parse_xy(map *m, int fd, draw_line *arg)
 	y = 0;
 	get_width(arg, fd, m, y);
 	get_height(arg, fd, m, y);
-	printf("Parsing x and y complete\n");
 }
