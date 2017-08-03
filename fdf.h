@@ -82,7 +82,7 @@ void  parse_z(map *m, int fd);
 env *make_env(map *m);
 int count_width(char **map_coord);
 void  slope_steep(env *fdf, draw_line *values);
-void slope_shallow(env *fdf, draw_line *values);
+void slope_gradual(env *fdf, draw_line *values);
 void slope_flat(env *fdf);
 void    plot_lines(env *fdf, map *m);
 
