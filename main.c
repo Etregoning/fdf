@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		ft_error("Error: Opening file failed.");
 	parse_z(m, fd);
 	fdf = make_env(m);
-	plot_lines(fdf, m);
+	plot_lines(fdf);
 	mlx_loop(fdf->mlx);
 	return (0);
 }

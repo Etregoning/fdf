@@ -84,6 +84,6 @@ int count_width(char **map_coord);
 void  slope_steep(env *fdf, draw_line *values);
 void slope_gradual(env *fdf, draw_line *values);
 void slope_flat(env *fdf);
-void    plot_lines(env *fdf, map *m);
+void    plot_lines(env *fdf);
 
 #endif

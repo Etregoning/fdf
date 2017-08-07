@@ -22,8 +22,6 @@ coord	**plot_cart(env *fdf, map *m)
 	fdf->mid_y = m->h / 2;
 	cart = (coord **)malloc(sizeof(coord *) * (m->h + 1));
 	i = 0;
-	printf("gap = [%d]\n", fdf->gap);
-	printf("mid x = %d\nmid y = %d\n",fdf->mid_x, fdf->mid_y );
 	while (i < m->h)
 	{
 		cart[i] = (coord *)malloc(sizeof(coord) * (m->w + 1));
@@ -34,10 +32,8 @@ coord	**plot_cart(env *fdf, map *m)
 			cart[i][j].y = ((i - fdf->mid_y) * fdf->gap) + fdf->win_h / 2;
 			cart[i][j].z = m->map_ptr[i][j] * 5;
 			cart[i][j].raw_z = m->map_ptr[i][j];
-			printf("[%3f][%3f][%3f]\n", cart[i][j].y, cart[i][j].x, cart[i][j].z);
 			j++;
 		}
-		printf("Done storing\n\n");
 		i++;
 	}
 	return (cart);
