@@ -66,12 +66,10 @@ void	values_right(env **fdf, int i, int j)
 		(*fdf)->x2 = round((*fdf)->cart[i][j + 1].x);
 		(*fdf)->y2 = round((*fdf)->cart[i][j + 1].y);
 		(*fdf)->z = (*fdf)->cart[i][j].z;
-		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
+		(*fdf)->next_z = (*fdf)->cart[i][j + 1].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
-	printf("y1 = %f, y2 = %f\n", (*fdf)->y1, (*fdf)->y2);
-	printf("x1 = %f, x2 = %f\n", (*fdf)->x1, (*fdf)->x2);
 }
 
 void	draw_right(env *fdf, map *m, draw_line **bresen)
@@ -108,5 +106,5 @@ void	plot_lines(env *fdf, map *m)
 
 	bresen = (draw_line *)malloc(sizeof(draw_line));
 	draw_right(fdf, m, &bresen);
-	//draw_down(fdf, m, &bresen);
+	draw_down(fdf, m, &bresen);
 }

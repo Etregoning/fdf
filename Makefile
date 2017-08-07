@@ -13,7 +13,7 @@
 NAME		= fdf
 CFLAGS	= -fsanitize=address -Wall -Werror -Wextra -lmlx -lft -framework OpenGL -framework AppKit
 INCLUDES = -I./includes/mlx -I./includes/libft -L./includes/mlx -L./includes/libft
-SRC 		= main.c parse_xy.c parse_z.c environment.c slope.c draw.c
+SRC 		= main.c parse_xy.c parse_z.c environment.c slope.c draw.c alloc_wrap.c
 OBJ			= $(FILES:%.c=%.o)
 
 all: $(NAME)
