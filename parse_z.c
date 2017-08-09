@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   store.c                                            :+:      :+:    :+:   */
+/*   parse_z.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int *split_atoi(char **s, int w)
+int		*split_atoi(char **s, int w)
 {
 	int *map;
 	int i;
@@ -27,12 +27,12 @@ int *split_atoi(char **s, int w)
 	return (map);
 }
 
-void   parse_z(map *m, int fd)
+void	parse_z(t_map *m, int fd)
 {
-	int   x;
-	int   i;
-	char  **points;
-	char  *line;
+	int		x;
+	int		i;
+	char	**points;
+	char	*line;
 
 	x = 0;
 	m->hmin = 0;

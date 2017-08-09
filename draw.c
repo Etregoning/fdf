@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	values_down(env **fdf, int i, int j)
+void	values_down(t_env **fdf, int i, int j)
 {
 	if (i + 1 < (*fdf)->h)
 	{
@@ -27,7 +27,7 @@ void	values_down(env **fdf, int i, int j)
 	}
 }
 
-void	draw_down(env *fdf, draw_line **values)
+void	draw_down(t_env *fdf, t_drawline **values)
 {
 	fdf->i = 0;
 	while (fdf->i + 1 < fdf->h)
@@ -37,9 +37,7 @@ void	draw_down(env *fdf, draw_line **values)
 		{
 			values_down(&fdf, fdf->i, fdf->j);
 			if (fdf->run == 0 && fdf->i + 1 < fdf->h)
-			{
 				slope_flat(fdf);
-			}
 			else
 			{
 				fdf->m = fdf->rise / fdf->run;
@@ -57,7 +55,7 @@ void	draw_down(env *fdf, draw_line **values)
 	}
 }
 
-void	values_right(env **fdf, int i, int j)
+void	values_right(t_env **fdf, int i, int j)
 {
 	if (j + 1 < (*fdf)->w)
 	{
@@ -72,7 +70,7 @@ void	values_right(env **fdf, int i, int j)
 	}
 }
 
-void	draw_right(env *fdf, draw_line **values)
+void	draw_right(t_env *fdf, t_drawline **values)
 {
 	fdf->i = 0;
 	while (fdf->i < fdf->h)
@@ -81,7 +79,7 @@ void	draw_right(env *fdf, draw_line **values)
 		while (fdf->j + 1 < fdf->w)
 		{
 			values_right(&fdf, fdf->i, fdf->j);
-			if (fdf->run == 0  && fdf->j + 1 < fdf->h)
+			if (fdf->run == 0 && fdf->j + 1 < fdf->h)
 				slope_flat(fdf);
 			else
 			{
@@ -100,13 +98,14 @@ void	draw_right(env *fdf, draw_line **values)
 	}
 }
 
-void	plot_lines(env *fdf)
+void	plot_lines(t_env *fdf)
 {
-	draw_line *values;
+	t_drawline *values;
 
-	values = (draw_line *)malloc(sizeof(draw_line));
+	values = (t_drawline *)malloc(sizeof(t_drawline));
 	rotate_z(fdf);
 	rotate_x(fdf);
+	translate(fdf);
 	draw_right(fdf, &values);
 	draw_down(fdf, &values);
 }

@@ -14,14 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	env			*fdf;
-	map			*m;
-	draw_line	arg;
+	t_env		*fdf;
+	t_map		*m;
+	t_drawline	arg;
 	int			fd;
 
 	if (ac != 2)
 		ft_error("Error: Invalid argument(s).");
-	if (!(m = (map *)ft_memalloc(sizeof(map))))
+	if (!(m = (t_map *)ft_memalloc(sizeof(t_map))))
 		ft_error("Error: Failed to allocate memory.");
 	if ((arg.str = ft_strstr(av[1], ".fdf")) == 0)
 		ft_error("Error: Invalid file extension.");

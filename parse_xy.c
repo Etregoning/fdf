@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_xy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,7 +23,7 @@ void	check_line(char *str)
 	{
 		if (ft_isalpha(str[i]) == 1)
 			ft_error("Error: Alphabetical characters found.");
-		if ((str[i] == '-' && !(ft_isdigit(str[i + 1]))) || str[i] == '\t' )
+		if ((str[i] == '-' && !(ft_isdigit(str[i + 1]))) || str[i] == '\t')
 			ft_error("Error: Forbidden characters found.");
 		i++;
 	}
@@ -39,15 +39,16 @@ int		count_width(char **map_coord)
 	return (width);
 }
 
-int		get_width(draw_line *arg, int fd, map *m, int y)
+int		get_width(t_drawline *arg, int fd, t_map *m, int y)
 {
-	int width;
-	char **points;
+	int		width;
+	char	**points;
 
 	if (get_next_line(fd, &(arg->line)))
 	{
 		check_line(arg->line);
-		if ((arg->points = ft_strsplit(arg->line, ' ')) == NULL || !*arg->points)
+		if ((arg->points = ft_strsplit(arg->line, ' '))
+		== NULL || !*arg->points)
 			ft_error("Error: Missing Content");
 		if (!(width = count_width(arg->points)))
 			ft_error("Error: Invalid Width");
@@ -62,10 +63,10 @@ int		get_width(draw_line *arg, int fd, map *m, int y)
 	return (y);
 }
 
-void	get_height(draw_line *arg, int fd, map *m, int y)
+void	get_height(t_drawline *arg, int fd, t_map *m, int y)
 {
-	char **points;
-	int width;
+	char	**points;
+	int		width;
 
 	while (get_next_line(fd, &(arg->line)))
 	{
@@ -74,7 +75,7 @@ void	get_height(draw_line *arg, int fd, map *m, int y)
 			ft_error("Error: Invalid Width");
 		else
 			points = ft_strsplit(arg->line, ' ');
-			y++;
+		y++;
 	}
 	m->h = y;
 	free(arg->points);
@@ -82,7 +83,7 @@ void	get_height(draw_line *arg, int fd, map *m, int y)
 	close(fd);
 }
 
-void	parse_xy(map *m, int fd, draw_line *arg)
+void	parse_xy(t_map *m, int fd, t_drawline *arg)
 {
 	int y;
 

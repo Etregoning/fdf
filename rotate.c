@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	rotate_z(env *fdf)
+void	rotate_z(t_env *fdf)
 {
 	float	x;
 	float	y;
@@ -35,12 +35,12 @@ void	rotate_z(env *fdf)
 	}
 }
 
-void	rotate_x(env *fdf)
+void	rotate_x(t_env *fdf)
 {
-	float y;
-	float z;
-	int i;
-	int j;
+	float	y;
+	float	z;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < fdf->h)

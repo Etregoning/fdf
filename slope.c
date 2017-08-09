@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	slope_steep(env *fdf, draw_line *values)
+void	slope_steep(t_env *fdf, t_drawline *values)
 {
 	float x;
 	float tmp;
@@ -28,7 +28,7 @@ void	slope_steep(env *fdf, draw_line *values)
 	}
 	while (fdf->y1 < fdf->y2)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, x, fdf->y1, WHITE);
+		mlx_pixel_put(fdf->mlx, fdf->win, x, fdf->y1, RED);
 		values->offset += values->delta;
 		if (values->offset >= values->threshold)
 		{
@@ -39,7 +39,7 @@ void	slope_steep(env *fdf, draw_line *values)
 	}
 }
 
-void	slope_gradual(env *fdf, draw_line *values)
+void	slope_gradual(t_env *fdf, t_drawline *values)
 {
 	float y;
 	float tmp;
@@ -55,7 +55,7 @@ void	slope_gradual(env *fdf, draw_line *values)
 	}
 	while (fdf->x1 < fdf->x2)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, y, WHITE);
+		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, y, RED);
 		values->offset += values->delta;
 		if (values->offset >= values->threshold)
 		{
@@ -66,9 +66,9 @@ void	slope_gradual(env *fdf, draw_line *values)
 	}
 }
 
-void	slope_flat(env *fdf)
+void	slope_flat(t_env *fdf)
 {
-	float   tmp;
+	float	tmp;
 
 	if (fdf->y2 < fdf->y1)
 	{
@@ -78,7 +78,7 @@ void	slope_flat(env *fdf)
 	}
 	while (fdf->y1 <= fdf->y2)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, fdf->y1, WHITE);
+		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, fdf->y1, RED);
 		fdf->y1++;
 	}
 }
