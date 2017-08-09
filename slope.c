@@ -21,9 +21,9 @@ void	slope_steep(env *fdf, draw_line *values)
 	x = fdf->x1;
 	if (fdf->y2 < fdf->y1)
 	{
-		tmp = fdf->y2;
-		fdf->y2 = fdf->y1;
-		fdf->y1 = tmp;
+		tmp = fdf->y1;
+		fdf->y1 = fdf->y2;
+		fdf->y2 = tmp;
 		x = fdf->x2;
 	}
 	while (fdf->y1 < fdf->y2)
@@ -48,10 +48,10 @@ void	slope_gradual(env *fdf, draw_line *values)
 	y = fdf->y1;
 	if (fdf->x2 < fdf->x1)
 	{
-		tmp = fdf->x2;
-		fdf->x2 = fdf->x1;
-		fdf->x1 = tmp;
-		y = fdf->x2;
+		tmp = fdf->x1;
+		fdf->x1 = fdf->x2;
+		fdf->x2 = tmp;
+		y = fdf->y2;
 	}
 	while (fdf->x1 < fdf->x2)
 	{
@@ -72,9 +72,9 @@ void	slope_flat(env *fdf)
 
 	if (fdf->y2 < fdf->y1)
 	{
-		tmp = fdf->y2;
-		fdf->y2 = fdf->y1;
-		fdf->y1 = tmp;
+		tmp = fdf->y1;
+		fdf->y1 = fdf->y2;
+		fdf->y2 = tmp;
 	}
 	while (fdf->y1 <= fdf->y2)
 	{

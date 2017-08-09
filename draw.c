@@ -20,21 +20,24 @@ void	values_down(env **fdf, int i, int j)
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
 		(*fdf)->x2 = round((*fdf)->cart[i + 1][j].x);
 		(*fdf)->y2 = round((*fdf)->cart[i + 1][j].y);
-		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
-		(*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
+		(*fdf)->z = (*fdf)->cart[i][j].z;
+		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
+		printf("z = %f\n", (*fdf)->z);
 	}
 }
 
 void	draw_down(env *fdf, draw_line **values)
 {
+	printf(" entering draw down function here\n");
 	fdf->i = 0;
 	while (fdf->i + 1 < fdf->h)
 	{
 		fdf->j = 0;
 		while (fdf->j < fdf->w)
 		{
+			printf("entering second loop in draw_down\n");
 			values_down(&fdf, fdf->i, fdf->j);
 			if (fdf->run == 0 && fdf->i + 1 < fdf->h)
 			{
@@ -65,8 +68,8 @@ void	values_right(env **fdf, int i, int j)
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
 		(*fdf)->x2 = round((*fdf)->cart[i][j + 1].x);
 		(*fdf)->y2 = round((*fdf)->cart[i][j + 1].y);
-		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
-		(*fdf)->next_z = (*fdf)->cart[i][j + 1].raw_z;
+		(*fdf)->z = (*fdf)->cart[i][j].z;
+		(*fdf)->next_z = (*fdf)->cart[i][j + 1].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
@@ -107,4 +110,6 @@ void	plot_lines(env *fdf)
 	values = (draw_line *)malloc(sizeof(draw_line));
 	draw_right(fdf, &values);
 	draw_down(fdf, &values);
+	rotate_z(&fdf);
+	rotate_x(&fdf);
 }
