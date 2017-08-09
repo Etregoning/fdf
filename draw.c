@@ -105,8 +105,8 @@ void	plot_lines(env *fdf)
 	draw_line *values;
 
 	values = (draw_line *)malloc(sizeof(draw_line));
-	draw_right(fdf, &values);
-	draw_down(fdf, &values);
 	rotate_z(fdf);
 	rotate_x(fdf);
+	draw_right(fdf, &values);
+	draw_down(fdf, &values);
 }
