@@ -84,7 +84,7 @@ void  slope_steep(env *fdf, draw_line *values);
 void slope_gradual(env *fdf, draw_line *values);
 void slope_flat(env *fdf);
 void    plot_lines(env *fdf);
-void	rotate_z(env **fdf);
-void	rotate_x(env **fdf);
+void	rotate_z(env *fdf);
+void	rotate_x(env *fdf);
 
 #endif

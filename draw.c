@@ -24,20 +24,17 @@ void	values_down(env **fdf, int i, int j)
 		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
-		printf("z = %f\n", (*fdf)->z);
 	}
 }
 
 void	draw_down(env *fdf, draw_line **values)
 {
-	printf(" entering draw down function here\n");
 	fdf->i = 0;
 	while (fdf->i + 1 < fdf->h)
 	{
 		fdf->j = 0;
 		while (fdf->j < fdf->w)
 		{
-			printf("entering second loop in draw_down\n");
 			values_down(&fdf, fdf->i, fdf->j);
 			if (fdf->run == 0 && fdf->i + 1 < fdf->h)
 			{
@@ -110,6 +107,6 @@ void	plot_lines(env *fdf)
 	values = (draw_line *)malloc(sizeof(draw_line));
 	draw_right(fdf, &values);
 	draw_down(fdf, &values);
-	rotate_z(&fdf);
-	rotate_x(&fdf);
+	rotate_z(fdf);
+	rotate_x(fdf);
 }

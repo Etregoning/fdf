@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-void	rotate_z(env **fdf)
+void	rotate_z(env *fdf)
 {
 	float	x;
 	float	y;
@@ -20,22 +20,22 @@ void	rotate_z(env **fdf)
 	int		j;
 
 	i = 0;
-	while (i < (*fdf)->h)
+	while (i < fdf->h)
 	{
 		j = 0;
-		while (j < (*fdf)->w)
+		while (j < fdf->w)
 		{
-			x = (*fdf)->cart[i][j].x;
-			y = (*fdf)->cart[i][j].y;
-			(*fdf)->cart[i][j].x = x * cos(0.7854) - y * sin(0.7854);
-			(*fdf)->cart[i][j].y = x * sin(0.7854) + y * cos(0.7854);
+			x = fdf->cart[i][j].x;
+			y = fdf->cart[i][j].y;
+			fdf->cart[i][j].x = x * cos(0.7854) - y * sin(0.7854);
+			fdf->cart[i][j].y = x * sin(0.7854) + y * cos(0.7854);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	rotate_x(env **fdf)
+void	rotate_x(env *fdf)
 {
 	float y;
 	float z;
@@ -43,15 +43,15 @@ void	rotate_x(env **fdf)
 	int j;
 
 	i = 0;
-	while (i < (*fdf)->h)
+	while (i < fdf->h)
 	{
 		j = 0;
-		while (j < (*fdf)->w)
+		while (j < fdf->w)
 		{
-			y = (*fdf)->cart[i][j].y;
-			z = (*fdf)->cart[i][j].z;
-			(*fdf)->cart[i][j].y = (y * cos(0.5235) - z * sin(0.5235));
-			(*fdf)->cart[i][j].z = (y * sin(0.5235) + z * cos(0.5235));
+			y = fdf->cart[i][j].y;
+			z = fdf->cart[i][j].z;
+			fdf->cart[i][j].y = (y * cos(0.5235) - z * sin(0.5235));
+			fdf->cart[i][j].z = (y * sin(0.5235) + z * cos(0.5235));
 			j++;
 		}
 		i++;
