@@ -10,25 +10,55 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= fdf
-CFLAGS	= -fsanitize=address -Wall -Werror -Wextra -lmlx -lft -framework OpenGL -framework AppKit
-INCLUDES = -I./includes/mlx -I./includes/libft -L./includes/mlx -L./includes/libft
-SRC 		= main.c parse_xy.c parse_z.c environment.c slope.c draw.c alloc_wrap.c rotate.c
-OBJ			= $(FILES:%.c=%.o)
+NAME = fdf
+CFLAGS = -Wall -Werror -Wextra -g
 
-all: $(NAME)
+SRC_FILES = main.c parse_xy.c parse_z.c environment.c slope.c draw.c rotate.c
+OBJ_FILES = $(SRC_FILES:.c=.o)
+
+SRC_DIR = ./src/
+OBJ_DIR = ./obj/
+INC_DIR = ./includes/
+MLX_DIR = ./mlx
+LIBFT_DIR = ./libft/
+
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+MLX = $(addprefix $(MLX_DIR), libmlx.a)
+LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
+
+LINK = -L $(MLX_DIR) -L $(LIBFT_DIR) \
+				-lmlx -lft -framework OpenGL -framework AppKit
+
+all: obj $(LIBFT) $(MLX) $(NAME)
+
+obj:
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+	@gcc $(CFLAGS) -I $(MLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
+
+$(LIBFT):
+	@make -C $(LIBFT_DIR)
+
+$(MLX):
+	@make -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	@gcc $(CFLAGS) $(SRC) $(INCLUDES) -o $(NAME)
-
-debug:
-	@gcc $(CFLAGS) -g $(SRC) $(INCLUDES) -o $(NAME)
+	@echo "Compiling..."
+	@gcc $(OBJ) $(LINK) -lm -o $(NAME)
+	@echo "$(NAME) Created."
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
+	@echo "Objects removed!"
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean
+	@echo "$(NAME) removed!"
 
 re: fclean all
 

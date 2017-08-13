@@ -12,8 +12,8 @@
 
 #ifndef FDF_H
 # define FDF_H
-# include <mlx.h>
-# include <libft.h>
+# include "mlx.h"
+# include "libft.h"
 # include <math.h>
 # include <stdio.h>
 # define WHITE 0x00FFFFFF
