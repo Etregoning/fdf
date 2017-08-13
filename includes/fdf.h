@@ -6,7 +6,7 @@
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 10:27:23 by etregoni          #+#    #+#             */
-/*   Updated: 2017/06/26 19:25:00 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/08/13 16:01:59 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_coord
 	float		raw_z;
 }				t_coord;
 
-typedef struct	s_t_drawline
+typedef struct	t_drawline
 {
 	char		*str;
 	char		**points;
@@ -37,6 +37,8 @@ typedef struct	s_t_drawline
 	float		offset;
 	float		threshold;
 	float		adjust;
+	float		color;
+	float		range;
 }				t_drawline;
 
 typedef struct	s_map
