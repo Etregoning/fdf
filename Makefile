@@ -13,13 +13,13 @@
 NAME = fdf
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRC_FILES = main.c parse_xy.c parse_z.c environment.c slope.c draw.c rotate.c
+SRC_FILES = main.c parse_xy.c parse_z.c environment.c slope.c draw.c rotate_color.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 INC_DIR = ./includes/
-MLX_DIR = ./mlx
+MLX_DIR = ./mlx/
 LIBFT_DIR = ./libft/
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -39,26 +39,32 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@gcc $(CFLAGS) -I $(MLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
 
 $(LIBFT):
+	@echo "\033[32mCompiling libft..."
 	@make -C $(LIBFT_DIR)
+	@echo "\033[1;4;32mlibft created.\033[0m"
 
 $(MLX):
+	@echo "\033[32mCompiling mlx...\033[0m"
 	@make -C $(MLX_DIR)
+	@echo "\033[1;4;32mmlx created.\033[0m"
 
 $(NAME): $(OBJ)
-	@echo "Compiling..."
+	@echo "\033[32mCompiling fdf..."
 	@gcc $(OBJ) $(LINK) -lm -o $(NAME)
-	@echo "$(NAME) Created."
+	@echo "\033[1;4;32m$(NAME) Created.\033[0m"
 
 clean:
+	@echo "\033[31mRemoving objects...\033[0m"
 	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
-	@echo "Objects removed!"
+	@echo "\033[1;4;31mObjects removed!\033[0m"
 
 fclean: clean
+	@echo "\033[31mRemoving fdf...\033[0m"
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo "$(NAME) removed!"
+	@echo "\033[1;4;31m$(NAME) removed!\033[0m"
 
 re: fclean all
 

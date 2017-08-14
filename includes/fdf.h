@@ -39,6 +39,7 @@ typedef struct	t_drawline
 	float		adjust;
 	float		color;
 	float		range;
+	float		tmp;
 }				t_drawline;
 
 typedef struct	s_map
@@ -74,6 +75,7 @@ typedef struct	s_env
 	int			w;
 	float		z;
 	float		next_z;
+	int			hmin;
 	void		*mlx;
 	void		*win;
 }				t_env;
@@ -89,5 +91,6 @@ void			plot_lines(t_env *fdf);
 void			rotate_z(t_env *fdf);
 void			rotate_x(t_env *fdf);
 void			translate(t_env *fdf);
+int		color(t_env *fdf, t_drawline *values, float distance);
 
 #endif

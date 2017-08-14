@@ -15,20 +15,22 @@
 void	slope_steep(t_env *fdf, t_drawline *values)
 {
 	float x;
-	float tmp;
 
 	values->delta = fabsf(fdf->run / fdf->rise);
 	x = fdf->x1;
 	if (fdf->y2 < fdf->y1)
 	{
-		tmp = fdf->y1;
+		values->tmp = fdf->y1;
 		fdf->y1 = fdf->y2;
-		fdf->y2 = tmp;
+		fdf->y2 = values->tmp;
 		x = fdf->x2;
 	}
+	values->tmp = fdf->y1;
+	values->range = (fdf->y2 - values->tmp);
 	while (fdf->y1 < fdf->y2)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, x, fdf->y1, RED);
+		values->color = color(fdf, values, fdf->y1 - values->tmp);
+		mlx_pixel_put(fdf->mlx, fdf->win, x, fdf->y1, values->color);
 		values->offset += values->delta;
 		if (values->offset >= values->threshold)
 		{
@@ -42,20 +44,22 @@ void	slope_steep(t_env *fdf, t_drawline *values)
 void	slope_gradual(t_env *fdf, t_drawline *values)
 {
 	float y;
-	float tmp;
 
 	values->delta = fabsf(fdf->m);
 	y = fdf->y1;
 	if (fdf->x2 < fdf->x1)
 	{
-		tmp = fdf->x1;
+		values->tmp = fdf->x1;
 		fdf->x1 = fdf->x2;
-		fdf->x2 = tmp;
+		fdf->x2 = values->tmp;
 		y = fdf->y2;
 	}
+	values->tmp = fdf->x1;
+	values->range = (fdf->x2 - values->tmp);
 	while (fdf->x1 < fdf->x2)
 	{
-		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, y, RED);
+		values->color = color(fdf, values, fdf->x1 - values->tmp);
+		mlx_pixel_put(fdf->mlx, fdf->win, fdf->x1, y, values->color);
 		values->offset += values->delta;
 		if (values->offset >= values->threshold)
 		{
@@ -70,6 +74,7 @@ void	slope_flat(t_env *fdf)
 {
 	float	tmp;
 
+	tmp = 0;
 	if (fdf->y2 < fdf->y1)
 	{
 		tmp = fdf->y1;

@@ -68,6 +68,7 @@ void	populate_env(t_env **fdf, t_map *m)
 	(*fdf)->x2 = 0;
 	(*fdf)->y1 = 0;
 	(*fdf)->y2 = 0;
+	(*fdf)->hmin = 0;
 	(*fdf)->gap = m->w >= m->h ? 700 / (m->w) : 700 / (m->h);
 	(*fdf)->big = m->w >= m->h ? m->w : m->h;
 	(*fdf)->w = m->w;
@@ -75,7 +76,7 @@ void	populate_env(t_env **fdf, t_map *m)
 	(*fdf)->rise = 0;
 	(*fdf)->run = 0;
 	(*fdf)->m = 0;
-	(*fdf)->win_w = 400 + ((*fdf)->gap) * ((*fdf)->big);
+	(*fdf)->win_w = 350 + ((*fdf)->gap) * ((*fdf)->big);
 	(*fdf)->win_h = ((*fdf)->win_w) - 100;
 	(*fdf)->cart = plot_cart(*fdf, m);
 	(*fdf)->mlx = mlx_init();

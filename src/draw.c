@@ -20,8 +20,8 @@ void	values_down(t_env **fdf, int i, int j)
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
 		(*fdf)->x2 = round((*fdf)->cart[i + 1][j].x);
 		(*fdf)->y2 = round((*fdf)->cart[i + 1][j].y);
-		(*fdf)->z = (*fdf)->cart[i][j].z;
-		(*fdf)->next_z = (*fdf)->cart[i + 1][j].z;
+		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
+		(*fdf)->next_z = (*fdf)->cart[i + 1][j].raw_z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
@@ -63,8 +63,8 @@ void	values_right(t_env **fdf, int i, int j)
 		(*fdf)->y1 = round((*fdf)->cart[i][j].y);
 		(*fdf)->x2 = round((*fdf)->cart[i][j + 1].x);
 		(*fdf)->y2 = round((*fdf)->cart[i][j + 1].y);
-		(*fdf)->z = (*fdf)->cart[i][j].z;
-		(*fdf)->next_z = (*fdf)->cart[i][j + 1].z;
+		(*fdf)->z = (*fdf)->cart[i][j].raw_z;
+		(*fdf)->next_z = (*fdf)->cart[i][j + 1].raw_z;
 		(*fdf)->rise = (*fdf)->y2 - (*fdf)->y1;
 		(*fdf)->run = (*fdf)->x2 - (*fdf)->x1;
 	}
@@ -103,8 +103,8 @@ void	plot_lines(t_env *fdf)
 	t_drawline *values;
 
 	values = (t_drawline *)malloc(sizeof(t_drawline));
-	rotate_z(fdf);
 	rotate_x(fdf);
+	rotate_z(fdf);
 	translate(fdf);
 	draw_right(fdf, &values);
 	draw_down(fdf, &values);
