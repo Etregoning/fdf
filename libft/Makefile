@@ -12,17 +12,19 @@ SRC = ft_putchar.c ft_putstr.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_putnbr.c f
 
 HDR = libft.h
 
+OBJ = $(SRC:.c=.o)
+
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(SRC)
-	ar rc $(NAME) *.o
-	ranlib $(NAME)
+	@gcc -Wall -Wextra -Werror -c $(SRC)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	/bin/rm -f *.o
+	@rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@rm -f $(NAME) $(OBJ)
 
 re: fclean all

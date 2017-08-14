@@ -6,7 +6,7 @@
 /*   By: etregoni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/23 10:27:23 by etregoni          #+#    #+#             */
-/*   Updated: 2017/06/26 19:25:00 by etregoni         ###   ########.fr       */
+/*   Updated: 2017/08/13 17:30:37 by etregoni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	populate_env(t_env **fdf, t_map *m)
 	(*fdf)->rise = 0;
 	(*fdf)->run = 0;
 	(*fdf)->m = 0;
-	(*fdf)->win_w = 800 + ((*fdf)->gap) * ((*fdf)->big);
-	(*fdf)->win_h = ((*fdf)->win_w) - 300;
+	(*fdf)->win_w = 400 + ((*fdf)->gap) * ((*fdf)->big);
+	(*fdf)->win_h = ((*fdf)->win_w) - 100;
 	(*fdf)->cart = plot_cart(*fdf, m);
 	(*fdf)->mlx = mlx_init();
 	(*fdf)->win =
